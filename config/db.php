@@ -1,9 +1,21 @@
 <?php
-
-return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=salute',
-    'username' => 'root',
-    'password' => '123',
-    'charset' => 'utf8',
-];
+if (YII_ENV_DEV) 
+{
+	return [
+    	'class' => 'yii\db\Connection',
+    	'dsn' => 'mysql:host=localhost;dbname=salute',
+    	'username' => 'root',
+    	'password' => '123',
+    	'charset' => 'utf8',
+	];
+}
+else
+{
+	return [
+    	'class' => 'yii\db\Connection',
+    	'dsn' => 'mysql:host=localhost;dbname=salute',
+    	'username' => 'root',
+    	'password' => 'Dk9xiMqELvnI',
+    	'charset' => 'utf8',
+	];
+}

@@ -13,7 +13,7 @@ else
 {
 	return [
     	'class' => 'yii\db\Connection',
-    	'dsn' => 'mysql:host=localhost;dbname=salute',
+    	'dsn' => 'mysql:host=45.33.29.22;dbname=salute',
     	'username' => 'root',
     	'password' => 'Dk9xiMqELvnI',
     	'charset' => 'utf8',

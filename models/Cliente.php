@@ -15,6 +15,8 @@ use Yii;
  * @property string $endereco
  * @property string $pre_existentes
  * @property string $alergias
+ *
+ * @property Ocorrencia[] $ocorrencias
  */
 class Cliente extends \yii\db\ActiveRecord
 {
@@ -33,7 +35,8 @@ class Cliente extends \yii\db\ActiveRecord
     {
         return [
             [['titular', 'pagamento'], 'integer'],
-            [['nome', 'cpf', 'endereco', 'pre_existentes', 'alergias'], 'string', 'max' => 255],
+            [['pre_existentes', 'alergias'], 'string'],
+            [['nome', 'cpf', 'endereco'], 'string', 'max' => 255],
         ];
     }
 
@@ -46,11 +49,19 @@ class Cliente extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'titular' => 'Titular',
-            'cpf' => 'CPF',
-            'pagamento' => 'Situação financeira',
-            'endereco' => 'Endereço',
-            'pre_existentes' => 'Pre-existentes',
+            'cpf' => 'Cpf',
+            'pagamento' => 'Pagamento',
+            'endereco' => 'Endereco',
+            'pre_existentes' => 'Pre Existentes',
             'alergias' => 'Alergias',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOcorrencias()
+    {
+        return $this->hasMany(Ocorrencia::className(), ['cliente_id' => 'id']);
     }
 }

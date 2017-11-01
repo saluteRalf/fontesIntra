@@ -1,8 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
-
+use app\models\Cliente;
 /* @var $this yii\web\View */
 /* @var $model app\models\Ocorrencia */
 /* @var $form yii\widgets\ActiveForm */
@@ -12,9 +13,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'cliente_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'cliente_id')->dropDownList(ArrayHelper::map(Cliente::find()->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
 
-    <?= $form->field($model, 'numero_ocorrencia')->textInput(['maxlength' => true]) ?>
+    <?php // $form->field($model, 'numero_ocorrencia')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'cep')->textInput(['maxlength' => true]) ?>
 
@@ -41,7 +42,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'conduta_id')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Registrar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

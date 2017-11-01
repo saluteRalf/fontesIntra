@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "ocorrencia".
  *
  * @property integer $id
- * @property string $cliente_id
+ * @property integer $cliente_id
  * @property string $numero_ocorrencia
  * @property string $cep
  * @property string $estado
@@ -22,6 +22,8 @@ use Yii;
  * @property integer $motivo
  * @property string $avaliacao
  * @property integer $conduta_id
+ *
+ * @property Cliente $cliente
  */
 class Ocorrencia extends \yii\db\ActiveRecord
 {
@@ -39,9 +41,10 @@ class Ocorrencia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['queixa_inicial_id', 'tipo', 'motivo', 'conduta_id'], 'integer'],
+            [['cliente_id', 'queixa_inicial_id', 'tipo', 'motivo', 'conduta_id'], 'integer'],
             [['avaliacao'], 'string'],
-            [['cliente_id', 'numero_ocorrencia', 'cep', 'estado', 'municipio', 'endereco', 'numero', 'complemento', 'referencia'], 'string', 'max' => 255],
+            [['numero_ocorrencia', 'cep', 'estado', 'municipio', 'endereco', 'numero', 'complemento', 'referencia'], 'string', 'max' => 255],
+            [['cliente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::className(), 'targetAttribute' => ['cliente_id' => 'id']],
         ];
     }
 
@@ -51,21 +54,29 @@ class Ocorrencia extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'cliente_id' => 'Cliente ID',
+            'id' => 'Número da ocorrência',
+            'cliente_id' => 'Cliente',
             'numero_ocorrencia' => 'Numero Ocorrencia',
-            'cep' => 'Cep',
+            'cep' => 'CEP',
             'estado' => 'Estado',
-            'municipio' => 'Municipio',
-            'endereco' => 'Endereco',
-            'numero' => 'Numero',
+            'municipio' => 'Município',
+            'endereco' => 'Endereço',
+            'numero' => 'Número',
             'complemento' => 'Complemento',
-            'referencia' => 'Referencia',
+            'referencia' => 'Referência',
             'queixa_inicial_id' => 'Queixa Inicial ID',
             'tipo' => 'Tipo',
             'motivo' => 'Motivo',
             'avaliacao' => 'Avaliacao',
             'conduta_id' => 'Conduta ID',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCliente()
+    {
+        return $this->hasOne(Cliente::className(), ['id' => 'cliente_id']);
     }
 }

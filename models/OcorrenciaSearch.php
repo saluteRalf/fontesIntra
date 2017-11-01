@@ -18,8 +18,8 @@ class OcorrenciaSearch extends Ocorrencia
     public function rules()
     {
         return [
-            [['id', 'queixa_inicial_id', 'tipo', 'motivo', 'conduta_id'], 'integer'],
-            [['cliente_id', 'numero_ocorrencia', 'cep', 'estado', 'municipio', 'endereco', 'numero', 'complemento', 'referencia', 'avaliacao'], 'safe'],
+            [['id', 'cliente_id', 'queixa_inicial_id', 'tipo', 'motivo', 'conduta_id'], 'integer'],
+            [['numero_ocorrencia', 'cep', 'estado', 'municipio', 'endereco', 'numero', 'complemento', 'referencia', 'avaliacao'], 'safe'],
         ];
     }
 
@@ -60,14 +60,14 @@ class OcorrenciaSearch extends Ocorrencia
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'cliente_id' => $this->cliente_id,
             'queixa_inicial_id' => $this->queixa_inicial_id,
             'tipo' => $this->tipo,
             'motivo' => $this->motivo,
             'conduta_id' => $this->conduta_id,
         ]);
 
-        $query->andFilterWhere(['like', 'cliente_id', $this->cliente_id])
-            ->andFilterWhere(['like', 'numero_ocorrencia', $this->numero_ocorrencia])
+        $query->andFilterWhere(['like', 'numero_ocorrencia', $this->numero_ocorrencia])
             ->andFilterWhere(['like', 'cep', $this->cep])
             ->andFilterWhere(['like', 'estado', $this->estado])
             ->andFilterWhere(['like', 'municipio', $this->municipio])

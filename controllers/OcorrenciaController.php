@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
 use app\models\Ocorrencia;
 use app\models\OcorrenciaSearch;
 use yii\web\Controller;
@@ -21,15 +20,6 @@ class OcorrenciaController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

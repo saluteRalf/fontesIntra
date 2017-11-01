@@ -23,6 +23,7 @@ use Yii;
  * @property string $avaliacao
  * @property integer $conduta_id
  *
+ * @property Queixa $queixaInicial
  * @property Cliente $cliente
  */
 class Ocorrencia extends \yii\db\ActiveRecord
@@ -44,6 +45,7 @@ class Ocorrencia extends \yii\db\ActiveRecord
             [['cliente_id', 'queixa_inicial_id', 'tipo', 'motivo', 'conduta_id'], 'integer'],
             [['avaliacao'], 'string'],
             [['numero_ocorrencia', 'cep', 'estado', 'municipio', 'endereco', 'numero', 'complemento', 'referencia'], 'string', 'max' => 255],
+            [['queixa_inicial_id'], 'exist', 'skipOnError' => true, 'targetClass' => Queixa::className(), 'targetAttribute' => ['queixa_inicial_id' => 'id']],
             [['cliente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::className(), 'targetAttribute' => ['cliente_id' => 'id']],
         ];
     }
@@ -54,22 +56,30 @@ class Ocorrencia extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'Número da ocorrência',
-            'cliente_id' => 'Cliente',
+            'id' => 'ID',
+            'cliente_id' => 'Cliente ID',
             'numero_ocorrencia' => 'Numero Ocorrencia',
-            'cep' => 'CEP',
+            'cep' => 'Cep',
             'estado' => 'Estado',
-            'municipio' => 'Município',
-            'endereco' => 'Endereço',
-            'numero' => 'Número',
+            'municipio' => 'Municipio',
+            'endereco' => 'Endereco',
+            'numero' => 'Numero',
             'complemento' => 'Complemento',
-            'referencia' => 'Referência',
+            'referencia' => 'Referencia',
             'queixa_inicial_id' => 'Queixa Inicial ID',
             'tipo' => 'Tipo',
             'motivo' => 'Motivo',
             'avaliacao' => 'Avaliacao',
             'conduta_id' => 'Conduta ID',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getQueixaInicial()
+    {
+        return $this->hasOne(Queixa::className(), ['id' => 'queixa_inicial_id']);
     }
 
     /**

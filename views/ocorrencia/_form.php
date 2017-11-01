@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use app\models\Cliente;
+use app\models\Queixa;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Ocorrencia */
 /* @var $form yii\widgets\ActiveForm */
@@ -14,6 +16,9 @@ use app\models\Cliente;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'cliente_id')->dropDownList(ArrayHelper::map(Cliente::find()->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
+
+    <?= $form->field($model, 'queixa_inicial_id')->dropDownList(ArrayHelper::map(Queixa::find()->asArray()->all(), 'id', 'apelido'), ['prompt'=>'Selecionar'])?>
+
 
     <?php // $form->field($model, 'numero_ocorrencia')->textInput(['maxlength' => true]) ?>
 

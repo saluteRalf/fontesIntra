@@ -36,8 +36,6 @@ use app\models\Queixa;
 
     <?= $form->field($model, 'referencia')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'queixa_inicial_id')->textInput() ?>
-
     <?= $form->field($model, 'tipo')->textInput() ?>
 
     <?= $form->field($model, 'motivo')->textInput() ?>

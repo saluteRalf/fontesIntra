@@ -19,8 +19,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nome') ?>
 
-    <?= $form->field($model, 'titular') ?>
-
     <?= $form->field($model, 'cpf') ?>
 
     <?= $form->field($model, 'pagamento') ?>

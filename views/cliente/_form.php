@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+use app\models\TipoCliente;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Cliente */
@@ -15,6 +17,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'cpf')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'tipo_cliente_id')->dropDownList(ArrayHelper::map(TipoCliente::find()->asArray()->all(), 'id', 'nomenclatura'), ['prompt'=>'Selecionar'])?>
 
     <?php // $form->field($model, 'pagamento')->textInput() ?>
 

@@ -21,8 +21,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cpf') ?>
 
-    <?= $form->field($model, 'pagamento') ?>
-
     <?php // echo $form->field($model, 'endereco') ?>
 
     <?php // echo $form->field($model, 'pre_existentes') ?>

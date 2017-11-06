@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use app\models\TipoCliente;
+use app\models\SituacaoPagamento;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Cliente */
@@ -27,6 +28,8 @@ use app\models\TipoCliente;
     <?= $form->field($model, 'pre_existentes')->textarea(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'alergias')->textarea(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'situacao_pagamento_id')->dropDownList(ArrayHelper::map(SituacaoPagamento::find()->asArray()->all(), 'id', 'descricao'), ['prompt'=>'Selecionar'])?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

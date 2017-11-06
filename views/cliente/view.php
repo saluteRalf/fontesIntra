@@ -32,7 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'nome',
             //'titular',
             'cpf',
-            'pagamento',
             'endereco',
             'pre_existentes',
             'alergias',

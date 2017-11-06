@@ -18,7 +18,7 @@ class ClienteSearch extends Cliente
     public function rules()
     {
         return [
-            [['id', 'pagamento'], 'integer'],
+            [['id', 'situacao_pagamento_id'], 'integer'],
             [['nome', 'cpf', 'endereco', 'pre_existentes', 'alergias'], 'safe'],
         ];
     }
@@ -60,7 +60,6 @@ class ClienteSearch extends Cliente
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'pagamento' => $this->pagamento,
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome])

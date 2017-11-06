@@ -23,8 +23,9 @@ use Yii;
  * @property string $avaliacao
  * @property integer $conduta_id
  *
- * @property Queixa $queixaInicial
+ * @property Conduta $conduta
  * @property Cliente $cliente
+ * @property Queixa $queixaInicial
  */
 class Ocorrencia extends \yii\db\ActiveRecord
 {
@@ -45,8 +46,9 @@ class Ocorrencia extends \yii\db\ActiveRecord
             [['cliente_id', 'queixa_inicial_id', 'tipo', 'motivo', 'conduta_id'], 'integer'],
             [['avaliacao'], 'string'],
             [['numero_ocorrencia', 'cep', 'estado', 'municipio', 'endereco', 'numero', 'complemento', 'referencia'], 'string', 'max' => 255],
-            [['queixa_inicial_id'], 'exist', 'skipOnError' => true, 'targetClass' => Queixa::className(), 'targetAttribute' => ['queixa_inicial_id' => 'id']],
+            [['conduta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Conduta::className(), 'targetAttribute' => ['conduta_id' => 'id']],
             [['cliente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::className(), 'targetAttribute' => ['cliente_id' => 'id']],
+            [['queixa_inicial_id'], 'exist', 'skipOnError' => true, 'targetClass' => Queixa::className(), 'targetAttribute' => ['queixa_inicial_id' => 'id']],
         ];
     }
 
@@ -77,9 +79,9 @@ class Ocorrencia extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getQueixaInicial()
+    public function getConduta()
     {
-        return $this->hasOne(Queixa::className(), ['id' => 'queixa_inicial_id']);
+        return $this->hasOne(Conduta::className(), ['id' => 'conduta_id']);
     }
 
     /**
@@ -88,5 +90,13 @@ class Ocorrencia extends \yii\db\ActiveRecord
     public function getCliente()
     {
         return $this->hasOne(Cliente::className(), ['id' => 'cliente_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getQueixaInicial()
+    {
+        return $this->hasOne(Queixa::className(), ['id' => 'queixa_inicial_id']);
     }
 }

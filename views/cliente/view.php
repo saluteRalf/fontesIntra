@@ -32,9 +32,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'nome',
             //'titular',
             'cpf',
+            [
+                'attribute' => 'tipo_cliente_id',
+                'value' => $model->tipoCliente->nomenclatura,
+            ],
             'endereco',
             'pre_existentes',
             'alergias',
+            [
+                'attribute' => 'situacao_pagamento_id',
+                'value' => $model->situacaoPagamento->descricao,
+            ],
         ],
     ]) ?>
 

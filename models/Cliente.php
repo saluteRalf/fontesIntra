@@ -52,12 +52,12 @@ class Cliente extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
-            'cpf' => 'Cpf',
-            'endereco' => 'Endereco',
-            'pre_existentes' => 'Pre Existentes',
+            'cpf' => 'CPF',
+            'endereco' => 'Endereço',
+            'pre_existentes' => 'Pre-existentes',
             'alergias' => 'Alergias',
-            'tipo_cliente_id' => 'Tipo Cliente ID',
-            'situacao_pagamento_id' => 'Situacao Pagamento ID',
+            'tipo_cliente_id' => 'Tipo',
+            'situacao_pagamento_id' => 'Pagamento',
         ];
     }
 

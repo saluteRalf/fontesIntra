@@ -38,9 +38,9 @@ use app\models\Equipe;
 
     <?= $form->field($model, 'referencia')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'tipo')->textInput() ?>
+    <?php // $form->field($model, 'tipo')->textInput() ?>
 
-    <?= $form->field($model, 'motivo')->textInput() ?>
+    <?php // $form->field($model, 'motivo')->textInput() ?>
 
     <?= $form->field($model, 'avaliacao')->textarea(['rows' => 6]) ?>
 

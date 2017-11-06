@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Ocorrencia */
 
-$this->title = $model->id;
+$this->title = 'Ocorrência '.$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Ocorrências', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -29,8 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'cliente_id',
-            'numero_ocorrencia',
+            [
+                'attribute'=> 'cliente_id',
+                'value' => $model->cliente->nome,
+            ],
+            //'numero_ocorrencia',
             'cep',
             'estado',
             'municipio',
@@ -38,11 +41,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'numero',
             'complemento',
             'referencia',
-            'queixa_inicial_id',
-            'tipo',
-            'motivo',
+            [
+                'attribute'=> 'queixa_inicial_id',
+                'value' => $model->queixaInicial->apelido,
+            ],
+            //'tipo',
+            //'motivo',
             'avaliacao:ntext',
-            'conduta_id',
+            [
+                'attribute'=> 'conduta_id',
+                'value' => $model->conduta->sigla,
+            ],
         ],
     ]) ?>
 

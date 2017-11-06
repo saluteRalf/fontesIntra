@@ -61,22 +61,22 @@ class Ocorrencia extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'cliente_id' => 'Cliente ID',
+            'id' => 'Número da ocorrência',
+            'cliente_id' => 'Cliente',
             'numero_ocorrencia' => 'Numero Ocorrencia',
-            'cep' => 'Cep',
+            'cep' => 'CEP',
             'estado' => 'Estado',
-            'municipio' => 'Municipio',
-            'endereco' => 'Endereco',
-            'numero' => 'Numero',
+            'municipio' => 'Município',
+            'endereco' => 'Endereço',
+            'numero' => 'Número',
             'complemento' => 'Complemento',
-            'referencia' => 'Referencia',
-            'queixa_inicial_id' => 'Queixa Inicial ID',
+            'referencia' => 'Referência',
+            'queixa_inicial_id' => 'Queixa Inicial',
             'tipo' => 'Tipo',
             'motivo' => 'Motivo',
-            'avaliacao' => 'Avaliacao',
-            'conduta_id' => 'Conduta ID',
-            'equipe_id' => 'Equipe ID',
+            'avaliacao' => 'Avaliação',
+            'conduta_id' => 'Conduta',
+            'equipe_id' => 'Equipe',
         ];
     }
 

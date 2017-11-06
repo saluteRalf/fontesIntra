@@ -59,14 +59,14 @@ class Equipe extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nome' => 'Nome',
-            'descricao' => 'Descricao',
-            'motorista_id' => 'Motorista ID',
-            'tecnico_enfermeiro_id' => 'Tecnico Enfermeiro ID',
-            'enfermeiro_id' => 'Enfermeiro ID',
-            'medico_id' => 'Medico ID',
-            'classificacao_id' => 'Classificacao ID',
-            'em_atendimento' => 'Em Atendimento',
+            'nome' => 'Nome da equipe',
+            'descricao' => 'Descrição',
+            'motorista_id' => 'Motorista',
+            'tecnico_enfermeiro_id' => 'Técnico enfermeiro',
+            'enfermeiro_id' => 'Enfermeiro',
+            'medico_id' => 'Médico',
+            'classificacao_id' => 'Classificação',
+            'em_atendimento' => 'Em atendimento',
             'localizacao_atual' => 'Localizacao Atual',
         ];
     }

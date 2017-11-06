@@ -2,11 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Conduta;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Equipe */
 
-$this->title = $model->id;
+$this->title = $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Equipes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Deletar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -28,16 +29,31 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'nome',
-            'descricao:ntext',
-            'motorista_id',
-            'tecnico_enfermeiro_id',
-            'enfermeiro_id',
-            'medico_id',
-            'classificacao_id',
-            'em_atendimento',
-            'localizacao_atual:ntext',
+            //'descricao:ntext',
+            [
+                'attribute' => 'motorista_id',
+                'value' => $model->motorista->nome,
+            ],
+            [
+                'attribute' => 'tecnico_enfermeiro_id',
+                'value' => $model->tecnicoEnfermeiro->nome,
+            ],
+            [
+                'attribute' => 'enfermeiro_id',
+                'value' => $model->enfermeiro->nome,
+            ],
+            [
+                'attribute' => 'medico_id',
+                'value' => $model->medico->nome,
+            ],
+            [
+                'attribute' => 'classificacao_id',
+                'value' => $model->classificacao->sigla,
+            ],
+            //'em_atendimento',
+            //'localizacao_atual:ntext',
         ],
     ]) ?>
 

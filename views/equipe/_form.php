@@ -1,7 +1,10 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+use app\models\Usuario;
+use app\models\Conduta;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Equipe */
@@ -14,24 +17,22 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'descricao')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'motorista_id')->dropDownList(ArrayHelper::map(Usuario::find()->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
 
-    <?= $form->field($model, 'motorista_id')->textInput() ?>
+    <?= $form->field($model, 'tecnico_enfermeiro_id')->dropDownList(ArrayHelper::map(Usuario::find()->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
 
-    <?= $form->field($model, 'tecnico_enfermeiro_id')->textInput() ?>
+    <?= $form->field($model, 'enfermeiro_id')->dropDownList(ArrayHelper::map(Usuario::find()->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
 
-    <?= $form->field($model, 'enfermeiro_id')->textInput() ?>
+    <?= $form->field($model, 'medico_id')->dropDownList(ArrayHelper::map(Usuario::find()->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
 
-    <?= $form->field($model, 'medico_id')->textInput() ?>
+    <?= $form->field($model, 'classificacao_id')->dropDownList(ArrayHelper::map(Conduta::find()->asArray()->all(), 'id', 'sigla'), ['prompt'=>'Selecionar'])?>
 
-    <?= $form->field($model, 'classificacao_id')->textInput(['maxlength' => true]) ?>
+    <?php //$form->field($model, 'em_atendimento')->textInput() ?>
 
-    <?= $form->field($model, 'em_atendimento')->textInput() ?>
-
-    <?= $form->field($model, 'localizacao_atual')->textarea(['rows' => 6]) ?>
+    <?php //$form->field($model, 'localizacao_atual')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Criar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

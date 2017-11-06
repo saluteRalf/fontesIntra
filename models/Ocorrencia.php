@@ -22,9 +22,11 @@ use Yii;
  * @property integer $motivo
  * @property string $avaliacao
  * @property integer $conduta_id
+ * @property integer $equipe_id
  *
- * @property Conduta $conduta
+ * @property Equipe $equipe
  * @property Cliente $cliente
+ * @property Conduta $conduta
  * @property Queixa $queixaInicial
  */
 class Ocorrencia extends \yii\db\ActiveRecord
@@ -43,11 +45,12 @@ class Ocorrencia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cliente_id', 'queixa_inicial_id', 'tipo', 'motivo', 'conduta_id'], 'integer'],
+            [['cliente_id', 'queixa_inicial_id', 'tipo', 'motivo', 'conduta_id', 'equipe_id'], 'integer'],
             [['avaliacao'], 'string'],
             [['numero_ocorrencia', 'cep', 'estado', 'municipio', 'endereco', 'numero', 'complemento', 'referencia'], 'string', 'max' => 255],
-            [['conduta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Conduta::className(), 'targetAttribute' => ['conduta_id' => 'id']],
+            [['equipe_id'], 'exist', 'skipOnError' => true, 'targetClass' => Equipe::className(), 'targetAttribute' => ['equipe_id' => 'id']],
             [['cliente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::className(), 'targetAttribute' => ['cliente_id' => 'id']],
+            [['conduta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Conduta::className(), 'targetAttribute' => ['conduta_id' => 'id']],
             [['queixa_inicial_id'], 'exist', 'skipOnError' => true, 'targetClass' => Queixa::className(), 'targetAttribute' => ['queixa_inicial_id' => 'id']],
         ];
     }
@@ -73,15 +76,16 @@ class Ocorrencia extends \yii\db\ActiveRecord
             'motivo' => 'Motivo',
             'avaliacao' => 'Avaliacao',
             'conduta_id' => 'Conduta ID',
+            'equipe_id' => 'Equipe ID',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getConduta()
+    public function getEquipe()
     {
-        return $this->hasOne(Conduta::className(), ['id' => 'conduta_id']);
+        return $this->hasOne(Equipe::className(), ['id' => 'equipe_id']);
     }
 
     /**
@@ -90,6 +94,14 @@ class Ocorrencia extends \yii\db\ActiveRecord
     public function getCliente()
     {
         return $this->hasOne(Cliente::className(), ['id' => 'cliente_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getConduta()
+    {
+        return $this->hasOne(Conduta::className(), ['id' => 'conduta_id']);
     }
 
     /**

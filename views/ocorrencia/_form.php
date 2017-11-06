@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 use app\models\Cliente;
 use app\models\Queixa;
 use app\models\Conduta;
+use app\models\Equipe;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ocorrencia */
@@ -44,6 +45,8 @@ use app\models\Conduta;
     <?= $form->field($model, 'avaliacao')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'conduta_id')->dropDownList(ArrayHelper::map(Conduta::find()->asArray()->all(), 'id', 'sigla'), ['prompt'=>'Selecionar'])?>
+
+    <?= $form->field($model, 'equipe_id')->dropDownList(ArrayHelper::map(Equipe::find()->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Registrar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

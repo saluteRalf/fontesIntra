@@ -48,7 +48,7 @@ class Usuario extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
-            'tipo_usuario_id' => 'Tipo Usuario ID',
+            'tipo_usuario_id' => 'Função',
             'senha' => 'Senha',
         ];
     }

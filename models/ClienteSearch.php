@@ -19,7 +19,7 @@ class ClienteSearch extends Cliente
     {
         return [
             [['id', 'situacao_pagamento_id'], 'integer'],
-            [['nome', 'cpf', 'endereco', 'pre_existentes', 'alergias'], 'safe'],
+            [['nome', 'cpf', 'endereco', 'pre_existentes', 'alergias', 'numero', 'complemento', 'bairro', 'cep', 'municipio', 'estado', 'referencia'], 'safe'],
         ];
     }
 

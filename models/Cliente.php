@@ -38,7 +38,8 @@ class Cliente extends \yii\db\ActiveRecord
         return [
             [['pre_existentes', 'alergias'], 'string'],
             [['tipo_cliente_id', 'situacao_pagamento_id'], 'integer'],
-            [['nome', 'cpf', 'endereco'], 'string', 'max' => 255],
+            [['nome', 'cpf', 'endereco', 'numero', 'complemento', 'bairro', 'cep', 'municipio', 'referencia'], 'string', 'max' => 255],
+			[['estado'], 'string', 'max' => 2],
             [['situacao_pagamento_id'], 'exist', 'skipOnError' => true, 'targetClass' => SituacaoPagamento::className(), 'targetAttribute' => ['situacao_pagamento_id' => 'id']],
             [['tipo_cliente_id'], 'exist', 'skipOnError' => true, 'targetClass' => TipoCliente::className(), 'targetAttribute' => ['tipo_cliente_id' => 'id']],
         ];
@@ -58,6 +59,13 @@ class Cliente extends \yii\db\ActiveRecord
             'alergias' => 'Alergias',
             'tipo_cliente_id' => 'Tipo',
             'situacao_pagamento_id' => 'Pagamento',
+			'numero' => 'Número',
+			'complemento' => 'Complemento',
+			'bairro' => 'Bairro',
+			'cep' => 'CEP',
+			'municipio' => 'Município',
+			'estado' => 'UF',
+			'referencia' => 'Referência'
         ];
     }
 

@@ -43,6 +43,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'situacao_pagamento_id',
                 'value' => $model->situacaoPagamento->descricao,
             ],
+			'numero',
+			'complemento',
+			'bairro',
+			'municipio',
+			'estado',
+			'referencia',
+			'cep'
         ],
     ]) ?>
 

@@ -32,6 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'endereco',
             // 'pre_existentes',
             // 'alergias',
+			//'numero',
+			//'complemento',
+			//'bairro',
+			//'cep',
+			//'municipio',
+			//'estado',
+			//'referencia',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

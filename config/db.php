@@ -5,7 +5,7 @@ if (YII_ENV_DEV)
     	'class' => 'yii\db\Connection',
     	'dsn' => 'mysql:host=localhost;dbname=salute',
     	'username' => 'root',
-    	'password' => '123',
+    	'password' => '',
     	'charset' => 'utf8',
 	];
 }

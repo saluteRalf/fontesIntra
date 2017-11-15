@@ -29,6 +29,20 @@ use app\models\SituacaoPagamento;
 
     <?= $form->field($model, 'alergias')->textarea(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'numero')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'complemento')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'bairro')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'cep')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'municipio')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'estado')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'referencia')->textarea(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'situacao_pagamento_id')->dropDownList(ArrayHelper::map(SituacaoPagamento::find()->asArray()->all(), 'id', 'descricao'), ['prompt'=>'Selecionar'])?>
 
     <div class="form-group">

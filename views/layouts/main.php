@@ -41,7 +41,7 @@ AppAsset::register($this);
             //['label' => 'About', 'url' => ['/site/about']],
             //['label' => 'Contact', 'url' => ['/site/contact']],
             ['label' => 'Clientes', 'url' => ['/cliente/index']],
-            ['label' => 'Usuarios', 'url' => ['/usuario/index']],
+            ['label' => 'Colaboradores', 'url' => ['/usuario/index']],
             ['label' => 'Equipe', 'url' => ['/equipe/index']],
             ['label' => 'Ocorrências', 'url' => ['/ocorrencia/index']],
 

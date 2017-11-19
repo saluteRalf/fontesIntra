@@ -29,7 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             //'id',
+			'cpf',
             'nome',
+			[
+				'attribute' => 'nr_classe',
+				'label' => $model->tipoUsuario->sigla_classe,
+			],
             [
                 'attribute' => 'tipo_usuario_id',
                 'value' => $model->tipoUsuario->nomenclatura,

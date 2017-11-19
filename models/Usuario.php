@@ -35,7 +35,7 @@ class Usuario extends \yii\db\ActiveRecord
     {
         return [
             [['tipo_usuario_id'], 'integer'],
-            [['nome', 'senha'], 'string', 'max' => 255],
+            [['nome', 'senha', 'cpf', 'nr_classe'], 'string', 'max' => 255],
             [['tipo_usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => TipoUsuario::className(), 'targetAttribute' => ['tipo_usuario_id' => 'id']],
         ];
     }
@@ -49,6 +49,8 @@ class Usuario extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'tipo_usuario_id' => 'Função',
+			'cpf' => 'CPF',
+			'nr_classe' => 'CNH/CRM/COREN',
             'senha' => 'Senha',
         ];
     }

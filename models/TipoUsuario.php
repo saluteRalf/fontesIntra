@@ -44,6 +44,7 @@ class TipoUsuario extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nomenclatura' => 'Nomenclatura',
             'descricao' => 'Descricao',
+			'sigla_classe' => 'Classe',
         ];
     }
 

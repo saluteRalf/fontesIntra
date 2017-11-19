@@ -19,6 +19,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nome') ?>
 
+    <?= $form->field($model, 'cpf') ?>
+
+    <?= $form->field($model, 'nr_classe') ?>
+
     <?= $form->field($model, 'senha') ?>
 
     <div class="form-group">

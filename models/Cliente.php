@@ -55,7 +55,7 @@ class Cliente extends \yii\db\ActiveRecord
             'nome' => 'Nome',
             'cpf' => 'CPF',
             'endereco' => 'Endereço',
-            'pre_existentes' => 'Pre-existentes',
+            'pre_existentes' => 'Pré-existentes',
             'alergias' => 'Alergias',
             'tipo_cliente_id' => 'Tipo',
             'situacao_pagamento_id' => 'Pagamento',

@@ -23,7 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'nome',
-            'classificacao_id',
+            //'classificacao_id',
+			[
+				'label' => 'Classificação',
+                'format' => 'ntext',
+				'attribute' => 'sigla',
+                'value' => function($model) {
+                    return $model->conduta->sigla;
+                },
+            ],
             // 'em_atendimento',
             // 'localizacao_atual:ntext',
 

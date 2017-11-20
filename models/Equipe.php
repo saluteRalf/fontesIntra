@@ -49,6 +49,7 @@ class Equipe extends \yii\db\ActiveRecord
             [['enfermeiro_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['enfermeiro_id' => 'id']],
             [['motorista_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['motorista_id' => 'id']],
             [['tecnico_enfermeiro_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['tecnico_enfermeiro_id' => 'id']],
+			[['nome', 'classificacao_id'], 'required'],
         ];
     }
 
@@ -82,7 +83,7 @@ class Equipe extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getClassificacao()
+    public function getConduta()
     {
         return $this->hasOne(Conduta::className(), ['id' => 'classificacao_id']);
     }

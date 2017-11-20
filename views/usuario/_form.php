@@ -20,6 +20,7 @@ use app\models\TipoUsuario;
     <?= $form->field($model, 'cpf')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'nr_classe')->textInput(['maxlength' => true])->label($model->tipoUsuario ? $model->tipoUsuario->sigla_classe : null, ['id'=>'usuario-nr_classe-label']) ?>
     <?= $form->field($model, 'senha')->passwordInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'repeatSenha')->passwordInput(['maxlength' => true, 'value'=>$model->isNewRecord ? null : $model->senha]) ?>
 	
 	<script>
 		var tiposUsuario = <?= json_encode(TipoUsuario::find()->asArray()->all()); ?>;

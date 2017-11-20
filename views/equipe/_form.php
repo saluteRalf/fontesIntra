@@ -9,6 +9,7 @@ use app\models\Conduta;
 /* @var $this yii\web\View */
 /* @var $model app\models\Equipe */
 /* @var $form yii\widgets\ActiveForm */
+$usuariosTipos = Usuario::find()->innerJoinWith('tipoUsuario', true);
 ?>
 
 <div class="equipe-form">
@@ -17,13 +18,13 @@ use app\models\Conduta;
 
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'motorista_id')->dropDownList(ArrayHelper::map(Usuario::find()->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
+    <?= $form->field($model, 'motorista_id')->dropDownList(ArrayHelper::map($usuariosTipos->where(['nomenclatura'=>'Motorista'])->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
 
-    <?= $form->field($model, 'tecnico_enfermeiro_id')->dropDownList(ArrayHelper::map(Usuario::find()->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
+    <?= $form->field($model, 'tecnico_enfermeiro_id')->dropDownList(ArrayHelper::map($usuariosTipos->where(['nomenclatura'=>'Técnico de Enfermagem'])->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
 
-    <?= $form->field($model, 'enfermeiro_id')->dropDownList(ArrayHelper::map(Usuario::find()->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
+    <?= $form->field($model, 'enfermeiro_id')->dropDownList(ArrayHelper::map($usuariosTipos->where(['nomenclatura'=>'Enfermeiro'])->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
 
-    <?= $form->field($model, 'medico_id')->dropDownList(ArrayHelper::map(Usuario::find()->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
+    <?= $form->field($model, 'medico_id')->dropDownList(ArrayHelper::map($usuariosTipos->where(['nomenclatura'=>'Médico'])->asArray()->all(), 'id', 'nome'), ['prompt'=>'Selecionar'])?>
 
     <?= $form->field($model, 'classificacao_id')->dropDownList(ArrayHelper::map(Conduta::find()->asArray()->all(), 'id', 'sigla'), ['prompt'=>'Selecionar'])?>
 

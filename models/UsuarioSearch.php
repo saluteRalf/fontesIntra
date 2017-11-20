@@ -12,6 +12,8 @@ use app\models\Usuario;
  */
 class UsuarioSearch extends Usuario
 {
+	public $nomenclatura;
+	
     /**
      * @inheritdoc
      */
@@ -19,7 +21,7 @@ class UsuarioSearch extends Usuario
     {
         return [
             [['id'], 'integer'],
-            [['nome', 'cpf', 'nr_classe', 'senha'], 'safe'],
+            [['nome', 'cpf', 'nomenclatura', 'nr_classe', 'senha'], 'safe'],
         ];
     }
 
@@ -41,12 +43,13 @@ class UsuarioSearch extends Usuario
      */
     public function search($params)
     {
-        $query = Usuario::find();
+        $query = Usuario::find()->innerJoinWith('tipoUsuario', true);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+			'sort' => ['attributes' => ['cpf', 'nome', 'nomenclatura', 'nr_classe']]
         ]);
 
         $this->load($params);
@@ -64,8 +67,8 @@ class UsuarioSearch extends Usuario
 
         $query->andFilterWhere(['like', 'nome', $this->nome])
 			->andFilterWhere(['like', 'cpf', $this->cpf])
-			->andFilterWhere(['like', 'nr_classe', $this->nr_classe])
-            ->andFilterWhere(['like', 'senha', $this->senha]);
+            ->andFilterWhere(['like', 'nomenclatura', $this->nomenclatura])
+			->andFilterWhere(['like', 'nr_classe', $this->nr_classe]);
 
         return $dataProvider;
     }

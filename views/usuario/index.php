@@ -27,8 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
 			'cpf',
             'nome',
+            [
+				'label' => 'Função',
+                'format' => 'ntext',
+				'attribute' => 'nomenclatura',
+                'value' => function($model) {
+                    return $model->tipoUsuario->nomenclatura;
+                },
+            ],
 			'nr_classe',
-            'tipo_usuario_id',
             //'senha',
 
             ['class' => 'yii\grid\ActionColumn'],

@@ -20,6 +20,7 @@ use Yii;
  */
 class Usuario extends \yii\db\ActiveRecord
 {
+	public $repeatSenha;
     /**
      * @inheritdoc
      */
@@ -35,8 +36,10 @@ class Usuario extends \yii\db\ActiveRecord
     {
         return [
             [['tipo_usuario_id'], 'integer'],
-            [['nome', 'senha', 'cpf', 'nr_classe'], 'string', 'max' => 255],
+            [['nome', 'senha', 'cpf', 'nr_classe', 'repeatSenha'], 'string', 'max' => 255],
+			[['senha', 'repeatSenha'], 'required'],
             [['tipo_usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => TipoUsuario::className(), 'targetAttribute' => ['tipo_usuario_id' => 'id']],
+			['repeatSenha', 'compare', 'compareAttribute'=>'senha', 'message'=>"A senha repetida deve ser igual à senha"],
         ];
     }
 
@@ -52,6 +55,7 @@ class Usuario extends \yii\db\ActiveRecord
 			'cpf' => 'CPF',
 			'nr_classe' => 'CNH/CRM/COREN',
             'senha' => 'Senha',
+			'repeatSenha' => 'Repetir senha',
         ];
     }
 

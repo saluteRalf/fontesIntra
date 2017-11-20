@@ -12,6 +12,8 @@ use app\models\Equipe;
  */
 class EquipeSearch extends Equipe
 {
+	public $sigla;
+	
     /**
      * @inheritdoc
      */
@@ -19,7 +21,7 @@ class EquipeSearch extends Equipe
     {
         return [
             [['id', 'motorista_id', 'tecnico_enfermeiro_id', 'enfermeiro_id', 'medico_id', 'em_atendimento'], 'integer'],
-            [['nome', 'descricao', 'classificacao_id', 'localizacao_atual'], 'safe'],
+            [['nome', 'descricao', 'classificacao_id', 'localizacao_atual', 'sigla'], 'safe'],
         ];
     }
 
@@ -41,12 +43,13 @@ class EquipeSearch extends Equipe
      */
     public function search($params)
     {
-        $query = Equipe::find();
+        $query = Equipe::find()->innerJoinWith('conduta', true);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+			'sort' => ['attributes' => ['nome', 'sigla']],
         ]);
 
         $this->load($params);
@@ -70,7 +73,8 @@ class EquipeSearch extends Equipe
         $query->andFilterWhere(['like', 'nome', $this->nome])
             ->andFilterWhere(['like', 'descricao', $this->descricao])
             ->andFilterWhere(['like', 'classificacao_id', $this->classificacao_id])
-            ->andFilterWhere(['like', 'localizacao_atual', $this->localizacao_atual]);
+            ->andFilterWhere(['like', 'localizacao_atual', $this->localizacao_atual])
+            ->andFilterWhere(['like', 'sigla', $this->sigla]);
 
         return $dataProvider;
     }

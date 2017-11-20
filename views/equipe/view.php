@@ -34,23 +34,23 @@ $this->params['breadcrumbs'][] = $this->title;
             //'descricao:ntext',
             [
                 'attribute' => 'motorista_id',
-                'value' => $model->motorista->nome,
+                'value' => ($model->motorista ? $model->motorista->nome : '-'),
             ],
             [
                 'attribute' => 'tecnico_enfermeiro_id',
-                'value' => $model->tecnicoEnfermeiro->nome,
+                'value' => ($model->tecnicoEnfermeiro ? $model->tecnicoEnfermeiro->nome : '-'),
             ],
             [
                 'attribute' => 'enfermeiro_id',
-                'value' => $model->enfermeiro->nome,
+                'value' => ($model->enfermeiro ? $model->enfermeiro->nome : '-'),
             ],
             [
                 'attribute' => 'medico_id',
-                'value' => $model->medico->nome,
+                'value' => ($model->medico ? $model->medico->nome : '-'),
             ],
             [
                 'attribute' => 'classificacao_id',
-                'value' => $model->classificacao->sigla,
+                'value' => $model->conduta->sigla,
             ],
             //'em_atendimento',
             //'localizacao_atual:ntext',

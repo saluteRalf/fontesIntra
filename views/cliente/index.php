@@ -39,6 +39,17 @@ $this->params['breadcrumbs'][] = $this->title;
 			//'municipio',
 			//'estado',
 			//'referencia',
+			[
+				'label' => 'Preexistentes',
+                'format' => 'ntext',
+                'attribute'=>'desc_pre_existente',
+                'value' => function($model) {
+                    foreach ($model->idPreExistentes as $preExistente) {
+                        $descPreexistentes[] = $preExistente->desc_pre_existente;
+                    }
+                    return implode(", ", $descPreexistentes);
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

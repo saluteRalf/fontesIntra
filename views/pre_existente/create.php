@@ -4,19 +4,18 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Cliente */
+/* @var $model app\models\PreExistentes */
 
-$this->title = 'Cadastrar cliente';
-$this->params['breadcrumbs'][] = ['label' => 'Clientes', 'url' => ['index']];
+$this->title = 'Cadastrar Preexistentes';
+$this->params['breadcrumbs'][] = ['label' => 'Preexistentes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cliente-create">
+<div class="pre-existentes-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
-		//'preexistentesItems' => $preexistentesItems,
     ]) ?>
 
 </div>

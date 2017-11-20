@@ -49,7 +49,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			'municipio',
 			'estado',
 			'referencia',
-			'cep'
+			'cep',
+			[
+                'attribute' => 'idPreExistentes',
+                'value' => implode(', ', \yii\helpers\ArrayHelper::map($model->idPreExistentes, 'id_pre_existente', 'desc_pre_existente')),
+            ],
         ],
     ]) ?>
 

@@ -15,10 +15,19 @@ use Yii;
  * @property string $alergias
  * @property integer $tipo_cliente_id
  * @property integer $situacao_pagamento_id
+ * @property string $numero
+ * @property string $bairro
+ * @property string $municipio
+ * @property string $estado
+ * @property string $referencia
+ * @property string $complemento
+ * @property string $cep
  *
  * @property SituacaoPagamento $situacaoPagamento
  * @property TipoCliente $tipoCliente
  * @property Ocorrencia[] $ocorrencias
+ * @property ClientePree[] $clientePrees
+ * @property PreExistentes[] $idPreExistentes
  */
 class Cliente extends \yii\db\ActiveRecord
 {
@@ -65,7 +74,8 @@ class Cliente extends \yii\db\ActiveRecord
 			'cep' => 'CEP',
 			'municipio' => 'Município',
 			'estado' => 'UF',
-			'referencia' => 'Referência'
+			'referencia' => 'Referência',
+			'idPreExistentes' => 'Preexistentes'
         ];
     }
 
@@ -91,5 +101,23 @@ class Cliente extends \yii\db\ActiveRecord
     public function getOcorrencias()
     {
         return $this->hasMany(Ocorrencia::className(), ['cliente_id' => 'id']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClientePrees()
+    {
+        return $this->hasMany(ClientePree::className(), ['id_cliente' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdPreExistentes()
+    {
+        return $this->hasMany(PreExistentes::className(), ['id_pre_existente' => 'id_pre_existente'])
+			->viaTable('cliente_pree', ['id_cliente' => 'id'])
+			->orderBy(['pre_existentes.desc_pre_existente' => SORT_ASC]);
     }
 }

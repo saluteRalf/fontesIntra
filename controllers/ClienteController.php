@@ -6,9 +6,12 @@ use Yii;
 use yii\filters\AccessControl;
 use app\models\Cliente;
 use app\models\ClienteSearch;
+use app\models\PreExistentes;
+use app\models\ClientePree;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * ClienteController implements the CRUD actions for Cliente model.
@@ -74,12 +77,15 @@ class ClienteController extends Controller
     public function actionCreate()
     {
         $model = new Cliente();
-
+		
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			$this->updateClientePree($_POST['Cliente']['preExistentes'], $model->id);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+			//$preexistentesItems = PreExistentes::find()->orderBy(['desc_pre_existente' => SORT_ASC])->all();
             return $this->render('create', [
                 'model' => $model,
+				//'preexistentesItems' => $preexistentesItems,
             ]);
         }
     }
@@ -93,12 +99,24 @@ class ClienteController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+		
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			/*foreach ($model->idPreExistentes as $value){
+				if (!$model->id, ['id_pre_existente' => $value->id_pre_existente]))
+				$model->link('idPreExistentes', $value);
+			}*/
+			//$model->link('idPreExistentes', $model->idPreExistentes);
+			//print_r(json_encode(ArrayHelper::map(PreExistentes::findAll($_POST['Cliente']['idPreExistentes']), 'id_pre_existente', 'desc_pre_existente')));
+			//die();
+			/*foreach ($_POST['Cliente']['idPreExistentes'] as $value){
+				$model->link('idPreExistentes', PreExistentes::find()->where(['id_pre_existente'=>$value]));//($_POST['Cliente']['idPreExistentes']));
+			}*/
+			$this->updateClientePree($_POST['Cliente']['idPreExistentes'], $model->id);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+				//'preexistentesItems' => $preexistentesItems,
             ]);
         }
     }
@@ -131,4 +149,39 @@ class ClienteController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+	
+	private function updateClientePree($preexistentesEscolhidos, $clienteId){
+		$preexistentesItems = PreExistentes::find()->all();
+		foreach($preexistentesItems as $valueTd){
+			$preexistenteBanco = ClientePree::findOne([
+				'id_cliente'=>$clienteId,
+				'id_pre_existente'=>$valueTd->id_pre_existente,
+			]);
+			if (!$preexistenteBanco){
+				foreach ($preexistentesEscolhidos as $value){
+					if ($valueTd->id_pre_existente == $value){
+						$newPreexistentes = new ClientePree();
+						$newPreexistentes->id_cliente = $clienteId;
+						$newPreexistentes->id_pre_existente = $valueTd->id_pre_existente;
+						$newPreexistentes->save();
+						
+						break;
+					}
+				}
+			}
+			else{
+				$deleta = true;
+				foreach ($preexistentesEscolhidos as $value){
+					if ($valueTd->id_pre_existente == $value){
+						$deleta = false;
+						break;
+					}
+				}
+				
+				if ($deleta){
+					$preexistenteBanco->delete();
+				}
+			}				
+		}
+	}
 }

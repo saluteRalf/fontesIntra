@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = 'Editar';
 
     <?= $this->render('_form', [
         'model' => $model,
+		//'preexistentesItems' => $preexistentesItems,
     ]) ?>
 
 </div>

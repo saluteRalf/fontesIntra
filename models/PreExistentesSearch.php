@@ -5,23 +5,21 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Cliente;
+use app\models\PreExistentes;
 
 /**
- * ClienteSearch represents the model behind the search form about `app\models\Cliente`.
+ * PreExistentesSearch represents the model behind the search form about `app\models\PreExistentes`.
  */
-class ClienteSearch extends Cliente
+class PreExistentesSearch extends PreExistentes
 {
-	public $desc_pre_existente;
-	
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'situacao_pagamento_id'], 'integer'],
-            [['nome', 'cpf', 'endereco', 'pre_existentes', 'alergias', 'numero', 'complemento', 'bairro', 'cep', 'municipio', 'estado', 'referencia', 'desc_pre_existente'], 'safe'],
+            [['id_pre_existente'], 'integer'],
+            [['desc_pre_existente'], 'safe'],
         ];
     }
 
@@ -43,13 +41,12 @@ class ClienteSearch extends Cliente
      */
     public function search($params)
     {
-        $query = Cliente::find()->innerJoinWith('idPreExistentes', true);
+        $query = PreExistentes::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-			'sort' => ['attributes' => ['cpf', 'nome', 'desc_pre_existente']]
         ]);
 
         $this->load($params);
@@ -62,14 +59,10 @@ class ClienteSearch extends Cliente
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id_pre_existente' => $this->id_pre_existente,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'cpf', $this->cpf])
-            ->andFilterWhere(['like', 'endereco', $this->endereco])
-            ->andFilterWhere(['like', 'alergias', $this->alergias])
-            ->andFilterWhere(['like', 'desc_pre_existente', $this->desc_pre_existente]);
+        $query->andFilterWhere(['like', 'desc_pre_existente', $this->desc_pre_existente]);
 
         return $dataProvider;
     }

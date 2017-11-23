@@ -5,9 +5,13 @@ namespace app\controllers;
 use Yii;
 use app\models\Ocorrencia;
 use app\models\OcorrenciaSearch;
+use app\models\Queixa;
+use app\models\OcorrenciaQueixa;
+use app\models\Cliente;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * OcorrenciaController implements the CRUD actions for Ocorrencia model.
@@ -66,6 +70,7 @@ class OcorrenciaController extends Controller
         $model = new Ocorrencia();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			$this->updateOcorrenciaQueixa($_POST['Ocorrencia']['idQueixas'], $model->id);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -85,6 +90,7 @@ class OcorrenciaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			$this->updateOcorrenciaQueixa($_POST['Ocorrencia']['idQueixas'], $model->id);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -121,4 +127,60 @@ class OcorrenciaController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+	
+	public function actionGetclientebyid($id){
+		//echo 'Olá';
+		//return true;
+		//if ($id = Yii::$app->request->post('id')) {
+			$nrClientes = Cliente::find()
+				->where(['id' => $id])
+				->count();
+	 
+			if ($nrClientes == 1) {
+				$cliente = Cliente::find()
+					->where(['id' => $id])
+					->all();
+					
+				echo \yii\helpers\Json::encode($cliente);
+			}
+			else{
+				echo 'Endereço não encontrado';
+			}
+		//}
+	}
+	
+	private function updateOcorrenciaQueixa($queixasEscolhidas, $ocorrenciaId){
+		$queixasItems = Queixa::find()->all();
+		foreach($queixasItems as $valueTd){
+			$queixaBanco = OcorrenciaQueixa::findOne([
+				'id_ocorrencia'=>$ocorrenciaId,
+				'id_queixa'=>$valueTd->id,
+			]);
+			if (!$queixaBanco){
+				foreach ($queixasEscolhidas as $value){
+					if ($valueTd->id == $value){
+						$newQueixas = new OcorrenciaQueixa();
+						$newQueixas->id_ocorrencia = $ocorrenciaId;
+						$newQueixas->id_queixa = $valueTd->id;
+						$newQueixas->save();
+						
+						break;
+					}
+				}
+			}
+			else{
+				$deleta = true;
+				foreach ($queixasEscolhidas as $value){
+					if ($valueTd->id == $value){
+						$deleta = false;
+						break;
+					}
+				}
+				
+				if ($deleta){
+					$queixaBanco->delete();
+				}
+			}				
+		}
+	}
 }

@@ -28,6 +28,8 @@ use Yii;
  * @property Cliente $cliente
  * @property Conduta $conduta
  * @property Queixa $queixaInicial
+ * @property OcorrenciaQueixa[] $ocorrenciaQueixas
+ * @property Queixa[] $idQueixas
  */
 class Ocorrencia extends \yii\db\ActiveRecord
 {
@@ -77,6 +79,7 @@ class Ocorrencia extends \yii\db\ActiveRecord
             'avaliacao' => 'Avaliação',
             'conduta_id' => 'Conduta',
             'equipe_id' => 'Equipe',
+			'idQueixas' => 'Queixas Iniciais',
         ];
     }
 
@@ -110,5 +113,23 @@ class Ocorrencia extends \yii\db\ActiveRecord
     public function getQueixaInicial()
     {
         return $this->hasOne(Queixa::className(), ['id' => 'queixa_inicial_id']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOcorrenciaQueixas()
+    {
+        return $this->hasMany(OcorrenciaQueixa::className(), ['id_ocorrencia' => 'id']);
+    }
+	
+	/**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdQueixas()
+    {
+        return $this->hasMany(Queixa::className(), ['id' => 'id_queixa'])
+			->viaTable('ocorrencia_queixa', ['id_ocorrencia' => 'id'])
+			->orderBy(['queixa.apelido' => SORT_ASC]);
     }
 }

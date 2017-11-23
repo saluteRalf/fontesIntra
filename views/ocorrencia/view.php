@@ -41,9 +41,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'numero',
             'complemento',
             'referencia',
-            [
+            /*[
                 'attribute'=> 'queixa_inicial_id',
                 'value' => $model->queixaInicial->apelido,
+            ],*/
+			[
+                'attribute' => 'idQueixas',
+                'value' => implode(', ', \yii\helpers\ArrayHelper::map($model->idQueixas, 'id', 'apelido')),
             ],
             //'tipo',
             //'motivo',

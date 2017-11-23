@@ -11,6 +11,9 @@ use Yii;
  * @property string $apelido
  * @property string $protocolo
  * @property string $criterio_inclusao
+ *
+ * @property OcorrenciaQueixa[] $ocorrenciaQueixas
+ * @property Ocorrencia[] $idOcorrencia
  */
 class Queixa extends \yii\db\ActiveRecord
 {
@@ -45,5 +48,22 @@ class Queixa extends \yii\db\ActiveRecord
             'protocolo' => 'Protocolo',
             'criterio_inclusao' => 'Criterio Inclusao',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOcorrenciaQueixas()
+    {
+        return $this->hasMany(OcorrenciaQueixa::className(), ['id_queixa' => 'id']);
+    }
+	
+	/**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdOcorrencias()
+    {
+        return $this->hasMany(Ocorrencia::className(), ['id' => 'id_ocorrencia'])
+			->viaTable('ocorrencia_queixa', ['id_queixa' => 'id']);
     }
 }

@@ -34,7 +34,7 @@ $preExistentes = ArrayHelper::map(PreExistentes::find()->orderBy(['desc_pre_exis
 
     <?php // $form->field($model, 'pagamento')->textInput() ?>
 
-    <?= $form->field($model, 'cep')->textInput(['maxlength' => true, 'onblur' => 'pesquisa_cep(this.value);']) ?>
+    <?= $form->field($model, 'cep')->textInput(['maxlength' => true, 'onchange' => 'pesquisa_cep(this.value);']) ?>
 
     <?= $form->field($model, 'endereco')->textInput(['maxlength' => true]) ?>
 
@@ -118,11 +118,11 @@ $preExistentes = ArrayHelper::map(PreExistentes::find()->orderBy(['desc_pre_exis
 				document.body.appendChild(script);
 
 			} //end if.
-			else {
+			/*else {
 				//cep é inválido.
 				limpa_formulário_cep();
 				alert("Formato de CEP inválido.");
-			}
+			}*/
 		} //end if.
 		else {
 			//cep sem valor, limpa formulário.

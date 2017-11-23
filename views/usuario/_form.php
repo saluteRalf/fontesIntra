@@ -24,7 +24,7 @@ use app\models\TipoUsuario;
 	
 	<script>
 		var tiposUsuario = <?= json_encode(TipoUsuario::find()->asArray()->all()); ?>;
-		function changeLabel(value){		
+		function changeLabel(value){
 			for(var i in tiposUsuario){
 				if (tiposUsuario[i].id == value){
 					$('#usuario-nr_classe-label').html(tiposUsuario[i].sigla_classe || 'N/D');

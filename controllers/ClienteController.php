@@ -79,7 +79,7 @@ class ClienteController extends Controller
         $model = new Cliente();
 		
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			$this->updateClientePree($_POST['Cliente']['preExistentes'], $model->id);
+			$this->updateClientePree($_POST['Cliente']['idPreExistentes'], $model->id);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 			//$preexistentesItems = PreExistentes::find()->orderBy(['desc_pre_existente' => SORT_ASC])->all();

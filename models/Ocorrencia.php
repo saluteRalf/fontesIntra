@@ -17,17 +17,19 @@ use Yii;
  * @property string $numero
  * @property string $complemento
  * @property string $referencia
- * @property integer $queixa_inicial_id
+ * @property string $outras_queixas
  * @property integer $tipo
  * @property integer $motivo
  * @property string $avaliacao
  * @property integer $conduta_id
  * @property integer $equipe_id
+ * @property string $evolucao 
+ * @property integer $id_sit_ocorrencia
  *
  * @property Equipe $equipe
  * @property Cliente $cliente
  * @property Conduta $conduta
- * @property Queixa $queixaInicial
+ * @property SituacaoOcorrencia $idSitOcorrencia
  * @property OcorrenciaQueixa[] $ocorrenciaQueixas
  * @property Queixa[] $idQueixas
  */
@@ -47,13 +49,14 @@ class Ocorrencia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cliente_id', 'queixa_inicial_id', 'tipo', 'motivo', 'conduta_id', 'equipe_id'], 'integer'],
-            [['avaliacao'], 'string'],
+            [['cliente_id', 'tipo', 'motivo', 'conduta_id', 'id_sit_ocorrencia'], 'integer'],
+            [['avaliacao', 'outras_queixas'], 'string'],
             [['numero_ocorrencia', 'cep', 'estado', 'municipio', 'endereco', 'numero', 'complemento', 'referencia'], 'string', 'max' => 255],
+			[['evolucao'], 'string', 'max' => 1000],
             [['equipe_id'], 'exist', 'skipOnError' => true, 'targetClass' => Equipe::className(), 'targetAttribute' => ['equipe_id' => 'id']],
             [['cliente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::className(), 'targetAttribute' => ['cliente_id' => 'id']],
             [['conduta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Conduta::className(), 'targetAttribute' => ['conduta_id' => 'id']],
-            [['queixa_inicial_id'], 'exist', 'skipOnError' => true, 'targetClass' => Queixa::className(), 'targetAttribute' => ['queixa_inicial_id' => 'id']],
+			[['id_sit_ocorrencia'], 'exist', 'skipOnError' => true, 'targetClass' => SituacaoOcorrencia::className(), 'targetAttribute' => ['id_sit_ocorrencia' => 'id_sit_ocorrencia']],
         ];
     }
 
@@ -73,13 +76,15 @@ class Ocorrencia extends \yii\db\ActiveRecord
             'numero' => 'Número',
             'complemento' => 'Complemento',
             'referencia' => 'Referência',
-            'queixa_inicial_id' => 'Queixa Inicial',
             'tipo' => 'Tipo',
             'motivo' => 'Motivo',
-            'avaliacao' => 'Avaliação',
+            'avaliacao' => 'Avaliação Pré-atendimento',
             'conduta_id' => 'Conduta',
             'equipe_id' => 'Equipe',
 			'idQueixas' => 'Queixas Iniciais',
+			'evolucao' => 'Evolução Pós-atendimento',
+            'id_sit_ocorrencia' => 'Situação da Ocorrência',
+			'outras_queixas' => 'Outras Queixas',
         ];
     }
 
@@ -106,13 +111,13 @@ class Ocorrencia extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Conduta::className(), ['id' => 'conduta_id']);
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getQueixaInicial()
+	
+	/**
+    * @return \yii\db\ActiveQuery
+    */
+    public function getIdSitOcorrencia()
     {
-        return $this->hasOne(Queixa::className(), ['id' => 'queixa_inicial_id']);
+        return $this->hasOne(SituacaoOcorrencia::className(), ['id_sit_ocorrencia' => 'id_sit_ocorrencia']);
     }
     
     /**

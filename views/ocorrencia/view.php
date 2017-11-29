@@ -49,12 +49,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'idQueixas',
                 'value' => implode(', ', \yii\helpers\ArrayHelper::map($model->idQueixas, 'id', 'apelido')),
             ],
+			'outras_queixas',
             //'tipo',
             //'motivo',
             'avaliacao:ntext',
             [
                 'attribute'=> 'conduta_id',
-                'value' => $model->conduta->sigla,
+                'value' => ($model->conduta ? $model->conduta->nomenclatura : '-'),
             ],
         ],
     ]) ?>

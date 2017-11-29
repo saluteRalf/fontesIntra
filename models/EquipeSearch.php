@@ -43,7 +43,7 @@ class EquipeSearch extends Equipe
      */
     public function search($params)
     {
-        $query = Equipe::find()->innerJoinWith('conduta', true);
+        $query = Equipe::find()->innerJoinWith('classificacao', true);
 
         // add conditions that should always apply here
 

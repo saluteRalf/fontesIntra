@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Deletar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Tem certeza de que deseja excluir este item?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -30,6 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             //'id',
+            [
+                'attribute' => 'classificacao_id',
+                'value' => $model->classificacao->sigla,
+            ],
             'nome',
             //'descricao:ntext',
             [
@@ -47,10 +51,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'medico_id',
                 'value' => ($model->medico ? $model->medico->nome : '-'),
-            ],
-            [
-                'attribute' => 'classificacao_id',
-                'value' => $model->conduta->sigla,
             ],
             //'em_atendimento',
             //'localizacao_atual:ntext',

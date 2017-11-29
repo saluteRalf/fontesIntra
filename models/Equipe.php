@@ -17,9 +17,10 @@ use Yii;
  * @property integer $classificacao_id
  * @property integer $em_atendimento
  * @property string $localizacao_atual
+ * @property integer $id_situacao
  *
+ * @property Classificacao $classificacao
  * @property Usuario $medico
- * @property Conduta $classificacao
  * @property Usuario $enfermeiro
  * @property Usuario $motorista
  * @property Usuario $tecnicoEnfermeiro
@@ -42,10 +43,10 @@ class Equipe extends \yii\db\ActiveRecord
     {
         return [
             [['descricao', 'localizacao_atual'], 'string'],
-            [['motorista_id', 'tecnico_enfermeiro_id', 'enfermeiro_id', 'medico_id', 'classificacao_id', 'em_atendimento'], 'integer'],
+            [['motorista_id', 'tecnico_enfermeiro_id', 'enfermeiro_id', 'medico_id', 'classificacao_id', 'em_atendimento', 'id_situacao'], 'integer'],
             [['nome'], 'string', 'max' => 50],
+			[['classificacao_id'], 'exist', 'skipOnError' => true, 'targetClass' => Classificacao::className(), 'targetAttribute' => ['classificacao_id' => 'id']],
             [['medico_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['medico_id' => 'id']],
-            [['classificacao_id'], 'exist', 'skipOnError' => true, 'targetClass' => Conduta::className(), 'targetAttribute' => ['classificacao_id' => 'id']],
             [['enfermeiro_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['enfermeiro_id' => 'id']],
             [['motorista_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['motorista_id' => 'id']],
             [['tecnico_enfermeiro_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['tecnico_enfermeiro_id' => 'id']],
@@ -69,6 +70,7 @@ class Equipe extends \yii\db\ActiveRecord
             'classificacao_id' => 'Classificação',
             'em_atendimento' => 'Em atendimento',
             'localizacao_atual' => 'Localizacao Atual',
+			'id_situacao' => 'Id Situacao',
         ];
     }
 
@@ -80,13 +82,13 @@ class Equipe extends \yii\db\ActiveRecord
         return $this->hasOne(Usuario::className(), ['id' => 'medico_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getConduta()
-    {
-        return $this->hasOne(Conduta::className(), ['id' => 'classificacao_id']);
-    }
+    /** 
+    * @return \yii\db\ActiveQuery 
+    */ 
+    public function getClassificacao() 
+    { 
+        return $this->hasOne(Classificacao::className(), ['id' => 'classificacao_id']); 
+    } 
 
     /**
      * @return \yii\db\ActiveQuery

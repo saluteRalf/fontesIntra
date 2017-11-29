@@ -18,8 +18,8 @@ class OcorrenciaSearch extends Ocorrencia
     public function rules()
     {
         return [
-            [['id', 'cliente_id', 'queixa_inicial_id', 'tipo', 'motivo', 'conduta_id'], 'integer'],
-            [['numero_ocorrencia', 'cep', 'estado', 'municipio', 'endereco', 'numero', 'complemento', 'referencia', 'avaliacao'], 'safe'],
+            [['id', 'cliente_id', 'tipo', 'motivo', 'conduta_id'], 'integer'],
+            [['numero_ocorrencia', 'cep', 'estado', 'municipio', 'endereco', 'numero', 'complemento', 'referencia', 'avaliacao', 'outras_queixas'], 'safe'],
         ];
     }
 
@@ -61,7 +61,6 @@ class OcorrenciaSearch extends Ocorrencia
         $query->andFilterWhere([
             'id' => $this->id,
             'cliente_id' => $this->cliente_id,
-            'queixa_inicial_id' => $this->queixa_inicial_id,
             'tipo' => $this->tipo,
             'motivo' => $this->motivo,
             'conduta_id' => $this->conduta_id,

@@ -157,23 +157,27 @@ class OcorrenciaController extends Controller
 				'id_queixa'=>$valueTd->id,
 			]);
 			if (!$queixaBanco){
-				foreach ($queixasEscolhidas as $value){
-					if ($valueTd->id == $value){
-						$newQueixas = new OcorrenciaQueixa();
-						$newQueixas->id_ocorrencia = $ocorrenciaId;
-						$newQueixas->id_queixa = $valueTd->id;
-						$newQueixas->save();
-						
-						break;
+				if ($queixasEscolhidas){
+					foreach ($queixasEscolhidas as $value){
+						if ($valueTd->id == $value){
+							$newQueixas = new OcorrenciaQueixa();
+							$newQueixas->id_ocorrencia = $ocorrenciaId;
+							$newQueixas->id_queixa = $valueTd->id;
+							$newQueixas->save();
+							
+							break;
+						}
 					}
 				}
 			}
 			else{
 				$deleta = true;
-				foreach ($queixasEscolhidas as $value){
-					if ($valueTd->id == $value){
-						$deleta = false;
-						break;
+				if ($queixasEscolhidas){
+					foreach ($queixasEscolhidas as $value){
+						if ($valueTd->id == $value){
+							$deleta = false;
+							break;
+						}
 					}
 				}
 				

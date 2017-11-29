@@ -39,7 +39,7 @@ class Usuario extends \yii\db\ActiveRecord
             [['nome', 'senha', 'cpf', 'nr_classe', 'repeatSenha'], 'string', 'max' => 255],
 			[['senha', 'repeatSenha'], 'required'],
             [['tipo_usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => TipoUsuario::className(), 'targetAttribute' => ['tipo_usuario_id' => 'id']],
-			['repeatSenha', 'compare', 'compareAttribute'=>'senha', 'message'=>"A senha repetida deve ser igual à senha"],
+			['repeatSenha', 'compare', 'compareAttribute'=>'senha', 'message'=>"A senha repetida deve ser igual"],
         ];
     }
 

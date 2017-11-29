@@ -37,7 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->tipoCliente->nomenclatura,
             ],
             'endereco',
-            'pre_existentes',
             'alergias',
             [
                 'attribute' => 'situacao_pagamento_id',
@@ -54,6 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'idPreExistentes',
                 'value' => implode(', ', \yii\helpers\ArrayHelper::map($model->idPreExistentes, 'id_pre_existente', 'desc_pre_existente')),
             ],
+            'pre_existentes',
         ],
     ]) ?>
 

@@ -54,7 +54,7 @@ class OcorrenciaQueixa extends \yii\db\ActiveRecord
      */
     public function getIdOcorrencia()
     {
-        return $this->hasOne(Ocorrencia::className(), ['id' => 'id_ocorrencia'])->inverseOf('ocorrenciaQueixas');
+        return $this->hasOne(Ocorrencia::className(), ['id' => 'id_ocorrencia']);
     }
 
     /**
@@ -62,6 +62,6 @@ class OcorrenciaQueixa extends \yii\db\ActiveRecord
      */
     public function getIdQueixa()
     {
-        return $this->hasOne(Queixa::className(), ['id' => 'id_queixa'])->inverseOf('ocorrenciaQueixas');
+        return $this->hasOne(Queixa::className(), ['id' => 'id_queixa']);
     }
 }

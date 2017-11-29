@@ -22,16 +22,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'nome',
-            //'classificacao_id',
 			[
 				'label' => 'Classificação',
                 'format' => 'ntext',
 				'attribute' => 'sigla',
                 'value' => function($model) {
-                    return $model->conduta->sigla;
+                    return $model->classificacao->sigla;
                 },
             ],
+            'nome',
+            //'classificacao_id',
             // 'em_atendimento',
             // 'localizacao_atual:ntext',
 

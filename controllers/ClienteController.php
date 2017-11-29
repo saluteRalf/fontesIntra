@@ -158,23 +158,27 @@ class ClienteController extends Controller
 				'id_pre_existente'=>$valueTd->id_pre_existente,
 			]);
 			if (!$preexistenteBanco){
-				foreach ($preexistentesEscolhidos as $value){
-					if ($valueTd->id_pre_existente == $value){
-						$newPreexistentes = new ClientePree();
-						$newPreexistentes->id_cliente = $clienteId;
-						$newPreexistentes->id_pre_existente = $valueTd->id_pre_existente;
-						$newPreexistentes->save();
-						
-						break;
+				if ($preexistentesEscolhidos){
+					foreach ($preexistentesEscolhidos as $value){
+						if ($valueTd->id_pre_existente == $value){
+							$newPreexistentes = new ClientePree();
+							$newPreexistentes->id_cliente = $clienteId;
+							$newPreexistentes->id_pre_existente = $valueTd->id_pre_existente;
+							$newPreexistentes->save();
+							
+							break;
+						}
 					}
 				}
 			}
 			else{
 				$deleta = true;
-				foreach ($preexistentesEscolhidos as $value){
-					if ($valueTd->id_pre_existente == $value){
-						$deleta = false;
-						break;
+				if ($preexistentesEscolhidos){
+					foreach ($preexistentesEscolhidos as $value){
+						if ($valueTd->id_pre_existente == $value){
+							$deleta = false;
+							break;
+						}
 					}
 				}
 				

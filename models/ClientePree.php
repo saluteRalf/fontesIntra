@@ -31,6 +31,7 @@ class ClientePree extends \yii\db\ActiveRecord
     {
         return [
             [['id_cliente', 'id_pre_existente'], 'integer'],
+			[['id_cliente', 'id_pre_existente'], 'unique', 'targetAttribute' => ['id_cliente', 'id_pre_existente'], 'message' => 'O Cliente já possui o Preexistente em questão.'], 
             [['id_cliente'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::className(), 'targetAttribute' => ['id_cliente' => 'id']],
             [['id_pre_existente'], 'exist', 'skipOnError' => true, 'targetClass' => PreExistentes::className(), 'targetAttribute' => ['id_pre_existente' => 'id_pre_existente']],
         ];
@@ -43,8 +44,8 @@ class ClientePree extends \yii\db\ActiveRecord
     {
         return [
             'id_cliente_pree' => 'Id Cliente Pree',
-            'id_cliente' => 'Id Cliente',
-            'id_pre_existente' => 'Id Pre Existente',
+            'id_cliente' => 'Cliente',
+            'id_pre_existente' => 'Preexistente',
         ];
     }
 
@@ -53,7 +54,7 @@ class ClientePree extends \yii\db\ActiveRecord
      */
     public function getIdCliente()
     {
-        return $this->hasOne(Cliente::className(), ['id' => 'id_cliente'])->inverseOf('clientePrees');
+        return $this->hasOne(Cliente::className(), ['id' => 'id_cliente']);
     }
 
     /**
@@ -61,6 +62,6 @@ class ClientePree extends \yii\db\ActiveRecord
      */
     public function getIdPreExistente()
     {
-        return $this->hasOne(PreExistentes::className(), ['id_pre_existente' => 'id_pre_existente'])->inverseOf('clientePrees');
+        return $this->hasOne(PreExistentes::className(), ['id_pre_existente' => 'id_pre_existente']);
     }
 }

@@ -20,6 +20,20 @@ use app\models\PreExistentes;
 /* @var $model app\models\Cliente */
 /* @var $form yii\widgets\ActiveForm */
 $preExistentes = ArrayHelper::map(PreExistentes::find()->orderBy(['desc_pre_existente' => SORT_ASC])->all(), 'id_pre_existente', 'desc_pre_existente');
+
+$this->registerJs(
+    "$('#cliente-idpreexistentes option').mousedown(function(e) {
+		e.preventDefault();
+		var originalScrollTop = $(this).parent().scrollTop();
+		$(this).prop('selected', $(this).prop('selected') ? false : true);
+		var self = this;
+		$(this).parent().focus();
+		setTimeout(function() {
+			$(self).parent().scrollTop(originalScrollTop);
+		}, 0);
+		return false;
+	});"
+);
 ?>
 
 <div class="cliente-form">
@@ -50,7 +64,9 @@ $preExistentes = ArrayHelper::map(PreExistentes::find()->orderBy(['desc_pre_exis
 
     <?= $form->field($model, 'referencia')->textarea(['maxlength' => true]) ?>
 	
-	<?= $form->field($model, 'idPreExistentes')->checkboxList($preExistentes)->label('Preexistentes') ?>
+	<?= $form->field($model, 'idPreExistentes')->listBox($preExistentes, ['multiple'=>'multiple'])->label('Preexistentes') ?>
+	
+	<?= $form->field($model, 'pre_existentes')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'alergias')->textarea(['maxlength' => true]) ?>
 
@@ -128,5 +144,5 @@ $preExistentes = ArrayHelper::map(PreExistentes::find()->orderBy(['desc_pre_exis
 			//cep sem valor, limpa formulário.
 			limpa_formulário_cep();
 		}
-	};	
+	}
 </script>

@@ -14,6 +14,20 @@ use app\models\Equipe;
 /* @var $form yii\widgets\ActiveForm */
 
 $queixa = ArrayHelper::map(Queixa::find()->orderBy(['apelido' => SORT_ASC])->all(), 'id', 'apelido');
+
+$this->registerJs(
+    "$('#ocorrencia-idqueixas option').mousedown(function(e) {
+		e.preventDefault();
+		var originalScrollTop = $(this).parent().scrollTop();
+		$(this).prop('selected', $(this).prop('selected') ? false : true);
+		var self = this;
+		$(this).parent().focus();
+		setTimeout(function() {
+			$(self).parent().scrollTop(originalScrollTop);
+		}, 0);
+		return false;
+	});"
+);
 ?>
 
 <div class="ocorrencia-form">
@@ -36,14 +50,21 @@ $queixa = ArrayHelper::map(Queixa::find()->orderBy(['apelido' => SORT_ASC])->all
 						$("#ocorrencia-referencia").val(jsonEndereco["referencia"]);
 					} catch (e) {
 						alert(data);
+						$("#ocorrencia-cep").val("");
+						$("#ocorrencia-estado").val("");
+						$("#ocorrencia-municipio").val("");
+						$("#ocorrencia-endereco").val("");
+						$("#ocorrencia-numero").val("");
+						$("#ocorrencia-complemento").val("");
+						$("#ocorrencia-referencia").val("");
 					}
                 }
             );
 		'])//,'onchange'=>'if '])//'onchange'=>'sugereEndereco(this.value);'])?>
-
-    <?php //$form->field($model, 'queixa_inicial_id')->dropDownList(ArrayHelper::map(Queixa::find()->asArray()->all(), 'id', 'apelido'), ['prompt'=>'Selecionar'])?>
 	
-	<?= $form->field($model, 'idQueixas')->checkboxList($queixa)->label('Queixas Iniciais') ?>
+	<?= $form->field($model, 'idQueixas')->listBox($queixa, ['multiple' => 'multiple'])->label('Queixas Iniciais') ?>
+
+    <?= $form->field($model, 'outras_queixas')->textInput(['maxlength' => true])?>
 
     <?php // $form->field($model, 'numero_ocorrencia')->textInput(['maxlength' => true]) ?>
 
@@ -74,17 +95,6 @@ $queixa = ArrayHelper::map(Queixa::find()->orderBy(['apelido' => SORT_ASC])->all
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Registrar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
-	
-	<!--<script>
-		function getEnderecoCliente(id_cliente){
-			$.post(
-				"<?=Url::toRoute('ocorrencia/getClienteById&id')?>",
-				{id:id_cliente}, function(data){
-					$("#ocorrencia-cep").val(data);
-				}
-			);
-		}
-	</script>-->
 
     <?php ActiveForm::end(); ?>
 

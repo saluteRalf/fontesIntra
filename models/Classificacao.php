@@ -5,22 +5,20 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "conduta".
+ * This is the model class for table "classificacao".
  *
  * @property integer $id
- * @property string $nomenclatura
+ * @property string $sigla
  * @property string $descricao
- *
- * @property Ocorrencia[] $ocorrencias
  */
-class Conduta extends \yii\db\ActiveRecord
+class Classificacao extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'conduta';
+        return 'classificacao';
     }
 
     /**
@@ -29,9 +27,8 @@ class Conduta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nomenclatura'], 'required'],
             [['descricao'], 'string'],
-            [['nomenclatura'], 'string', 'max' => 50],
+            [['sigla'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,16 +39,8 @@ class Conduta extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nomenclatura' => 'Nomenclatura',
+            'sigla' => 'Sigla',
             'descricao' => 'Descrição',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getOcorrencias()
-    {
-        return $this->hasMany(Ocorrencia::className(), ['conduta_id' => 'id']);
     }
 }
